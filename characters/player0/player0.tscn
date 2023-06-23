@@ -1,0 +1,162 @@
+[gd_scene load_steps=23 format=3 uid="uid://ddfvkcept7s0l"]
+
+[ext_resource type="Texture2D" uid="uid://cpqdtb26f65sq" path="res://art/dino/sheets/DinoSprites - doux.png" id="1_4vx0v"]
+[ext_resource type="Script" path="res://characters/player0/player0.gd" id="1_sx8m8"]
+[ext_resource type="Texture2D" uid="uid://dsdcbufri1lkc" path="res://art/dino/misc/shadow_2.png" id="3_bcagm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yfwb"]
+size = Vector2(8, 5)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldqqq"]
+animation = &"idleRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bit2r"]
+animation = &"kickRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pqj8q"]
+animation = &"walkRight"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgb0c"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fnp64"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2rwxp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_veoqw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ysx0p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3lui"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqvx2"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5yqya"]
+states/idleRight/node = SubResource("AnimationNodeAnimation_ldqqq")
+states/idleRight/position = Vector2(318.667, 99.7778)
+states/kickRight/node = SubResource("AnimationNodeAnimation_bit2r")
+states/kickRight/position = Vector2(386, 179.333)
+states/walkRight/node = SubResource("AnimationNodeAnimation_pqj8q")
+states/walkRight/position = Vector2(473.333, 100.444)
+transitions = ["Start", "idleRight", SubResource("AnimationNodeStateMachineTransition_fgb0c"), "idleRight", "walkRight", SubResource("AnimationNodeStateMachineTransition_fnp64"), "walkRight", "idleRight", SubResource("AnimationNodeStateMachineTransition_2rwxp"), "walkRight", "kickRight", SubResource("AnimationNodeStateMachineTransition_veoqw"), "idleRight", "kickRight", SubResource("AnimationNodeStateMachineTransition_ysx0p"), "kickRight", "idleRight", SubResource("AnimationNodeStateMachineTransition_c3lui"), "kickRight", "walkRight", SubResource("AnimationNodeStateMachineTransition_iqvx2")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3ax4w"]
+
+[sub_resource type="Animation" id="Animation_nwpih"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_oc4it"]
+resource_name = "idleRight"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_yqs3k"]
+resource_name = "kickRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_ykra3"]
+resource_name = "walkRight"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xcqc8"]
+_data = {
+"RESET": SubResource("Animation_nwpih"),
+"idleRight": SubResource("Animation_oc4it"),
+"kickRight": SubResource("Animation_yqs3k"),
+"walkRight": SubResource("Animation_ykra3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxfwk"]
+size = Vector2(4, 4)
+
+[node name="player0" type="CharacterBody2D"]
+y_sort_enabled = true
+motion_mode = 1
+script = ExtResource("1_sx8m8")
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_2yfwb")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_4vx0v")
+hframes = 24
+
+[node name="shadow" type="Sprite2D" parent="sprite"]
+z_index = -1
+texture = ExtResource("3_bcagm")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_5yqya")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_3ax4w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xcqc8")
+}
+
+[node name="kickArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="hitbox" type="CollisionShape2D" parent="kickArea"]
+position = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_qxfwk")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
