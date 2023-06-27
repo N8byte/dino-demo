@@ -122,7 +122,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxfwk"]
 size = Vector2(4, 4)
 
-[node name="player0" type="CharacterBody2D"]
+[node name="player0" type="CharacterBody2D" groups=["receivesItems"]]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_sx8m8")

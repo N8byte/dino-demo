@@ -18,7 +18,7 @@ func _physics_process(_delta):
 	else:
 		velocity = Vector2.ZERO
 		animationState.travel("idleRight")
-	
+
 	#face other direction
 	if (direction.x < 0 && previousDirection != LEFT):
 		apply_scale(Vector2(-1, 1))
@@ -26,11 +26,11 @@ func _physics_process(_delta):
 	elif (direction.x > 0 && previousDirection != RIGHT):
 		apply_scale(Vector2(-1, 1))
 		previousDirection = RIGHT
-	
+
 	#kicking
 	if Input.is_action_just_pressed("attack"):
 		animationState.travel("kickRight")
-	
+
 	#open chest
 	if animationState.get_current_node() == &"kickRight":
 		for area in kickArea.get_overlapping_areas():

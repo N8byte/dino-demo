@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqlpw2prorei0"]
 
-[ext_resource type="PackedScene" uid="uid://d1u5fw4fvd0c6" path="res://items/sword/sprite.tscn" id="1_5n262"]
+[ext_resource type="PackedScene" uid="uid://d1u5fw4fvd0c6" path="res://items/sword/sprite.tscn" id="1_hthlw"]
 
 [node name="sword" type="Node2D"]
 
-[node name="sprite" parent="." instance=ExtResource("1_5n262")]
+[node name="sprite" parent="." instance=ExtResource("1_hthlw")]
