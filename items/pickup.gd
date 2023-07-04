@@ -6,16 +6,16 @@ extends Area2D
 
 
 func pickedUp():
-	timer.start(3)
 	animation.play("pickedUp")
 	collider.set_disabled(true)
+	timer.start(3)
 
 
 func _physics_process(_delta):
 	for body in get_overlapping_bodies():
 		if body.is_in_group("receivesItems"):
-			body.receiveItem("sword")
 			pickedUp()
+			body.receiveItem("sword")
 
 
 func _on_timer_timeout():

@@ -10,13 +10,13 @@ var items : Array #list of 'items' (inner class)
 var pickupScene : Area2D
 
 
-class item:
-	var name : String
+class Item:
+	var itemName : String
 	var scene : PackedScene
 	var sprite : PackedScene
 
 	func _init(_name : String, _sprite: PackedScene, _scene : PackedScene):
-		name = _name
+		itemName = _name
 		scene = _scene
 		sprite = _sprite
 
@@ -41,10 +41,10 @@ func preloadItems():
 	var currentFolder : String = itemsDir.get_next()
 	while currentFolder != "":
 		if itemsDir.current_is_dir():
-			var name = currentFolder
+			var itemName = currentFolder
 			var scene = load(ITEM_FOLDER + "/" + currentFolder + "/sprite.tscn")
 			var sprite = load(ITEM_FOLDER + "/" + currentFolder + "/" + currentFolder + ".tscn")
-			items.append(item.new(name, scene, sprite))
+			items.append(Item.new(itemName, scene, sprite))
 		currentFolder = itemsDir.get_next()
 
 
@@ -53,23 +53,20 @@ func _ready():
 	pickupScene = preload("res://items/pickup.tscn").instantiate()
 
 
-func openChest(rarity := 1):
-	# generate item
-	var item : item = generateItem()
+func openChest(_rarity := 1):
+	# generate Item
+	var item : Item = generateItem()
 
-	# place item pickup in scene
+	# place Item pickup in scene
 	var pickup = pickupScene.duplicate()
 	pickup.add_child(item.getSprite())
 	get_tree().get_root().add_child(pickup)
 	remoteTransform.set_remote_node(pickup.get_path())
-#	var instancedItem = item.instantiate()
-#	get_tree().get_root().add_child(instancedItem)
-#	remoteTransform.set_remote_node(instancedItem.get_path())
 
 	collider.set_disabled(true)
 	animation.play("open")
 
 
-func generateItem() -> item:
+func generateItem() -> Item:
 	var item = items.pick_random()
 	return item
