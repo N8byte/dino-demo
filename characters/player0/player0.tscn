@@ -158,5 +158,6 @@ collision_mask = 2
 position = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_qxfwk")
 
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

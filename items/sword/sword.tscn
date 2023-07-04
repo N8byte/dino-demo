@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d1u5fw4fvd0c6" path="res://items/sword/sprite.tscn" id="1_hthlw"]
 
-[node name="sword" type="Node2D"]
+[node name="sword" type="Node2D" groups=["item"]]
 
 [node name="sprite" parent="." instance=ExtResource("1_hthlw")]
+flip_h = true

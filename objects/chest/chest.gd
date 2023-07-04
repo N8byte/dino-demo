@@ -1,12 +1,10 @@
-extends Node
+extends Node2D
 
 @onready var animation := $AnimationPlayer
-@onready var remoteTransform := $RemoteTransform2D
 @onready var collider := $Area2D/CollisionShape2D
 
 const ITEM_FOLDER = "res://items"
 var items : Array #list of 'items' (inner class)
-#var sprites : Array #list of scenes
 var pickupScene : Area2D
 
 
@@ -60,11 +58,12 @@ func openChest(_rarity := 1):
 	# place Item pickup in scene
 	var pickup = pickupScene.duplicate()
 	pickup.add_child(item.getSprite())
+	pickup.set_global_position(get_global_position())
 	get_tree().get_root().add_child(pickup)
-	remoteTransform.set_remote_node(pickup.get_path())
 
 	collider.set_disabled(true)
 	animation.play("open")
+	pickup.droppedFromChest(item.instantiate())
 
 
 func generateItem() -> Item:

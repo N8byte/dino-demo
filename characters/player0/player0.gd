@@ -40,5 +40,6 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func receiveItem(item):
-	print(item)
+func _on_child_entered_tree(node: Node):
+	if node.is_in_group("item"):
+		print('item received')
